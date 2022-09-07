@@ -1,15 +1,11 @@
 package com.kainos.ea;
 
-import com.kainos.ea.employee_stuff.Consultant;
 import com.kainos.ea.employee_stuff.Employee;
-import com.kainos.ea.employee_stuff.PayrollSystem;
-import com.kainos.ea.employee_stuff.SalesEmployee;
 
 import java.io.FileInputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class HR {
 
@@ -19,11 +15,13 @@ public class HR {
 
         long t1, t2;
         List<Employee> bigEmps = new ArrayList<>();
+        Statement st = null;
+        ResultSet rs = null;
 
-        try(Connection myCon2 = getConnection()) {
+        try(Connection myCon = getConnection()) {
 
-            Statement st = myCon2.createStatement();
-            ResultSet rs = st.executeQuery(
+            st = myCon.createStatement();
+            rs = st.executeQuery(
                     "SELECT emp_no AS `number`, "
                             + "CONCAT_WS (' ', first_name, last_name) AS `name`, "
                             + "salary * 100 AS `salary` "
@@ -39,6 +37,11 @@ public class HR {
         } catch(SQLException ex) {
 
             System.out.println(ex.getMessage());
+
+        } finally {
+
+//            DbUtils.closeQuietly(rs);
+//            DbUtils.closeQuietly(st);
 
         }
 
@@ -65,10 +68,8 @@ public class HR {
             return conn;
         }
 
-        try {
-            // Bad practice alert!
-            FileInputStream propsStream =
-                    new FileInputStream("employeesdb.properties");
+        try(FileInputStream propsStream =
+                    new FileInputStream("employeesdb.properties")) {
 
             Properties props = new Properties();
             props.load(propsStream);

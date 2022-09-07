@@ -20,12 +20,12 @@ public class Employee implements IPayable, Comparable<Employee> {
 
     }
 
-    public boolean setNumber(String number){
+    public void setNumber(String number){
 
         try{
 
             short s = Short.parseShort(number);
-            return setNumber(s);
+            setNumber(s);
 
         } catch(NumberFormatException e) {
 
@@ -99,6 +99,7 @@ public class Employee implements IPayable, Comparable<Employee> {
         return getSalary() / 12;
     }
 
+    @Override
     public boolean equals(Object obj) {
 
         if(obj instanceof Employee employee){
