@@ -1,4 +1,4 @@
-package test.com.kainos.ea.employee_stuff; 
+package com.kainos.ea.employee_stuff;
 
 import com.kainos.ea.employee_stuff.Consultant;
 import org.junit.Test;

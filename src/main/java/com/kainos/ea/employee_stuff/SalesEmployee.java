@@ -1,7 +1,5 @@
 package com.kainos.ea.employee_stuff;
 
-import java.util.Objects;
-
 public class SalesEmployee extends Employee {
 
     private float commissionRate;

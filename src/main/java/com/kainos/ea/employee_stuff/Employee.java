@@ -99,6 +99,7 @@ public class Employee implements IPayable, Comparable<Employee> {
         return getSalary() / 12;
     }
 
+    @Override
     public boolean equals(Object obj) {
 
         if(obj instanceof Employee employee){
